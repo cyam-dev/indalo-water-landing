@@ -359,14 +359,13 @@ function Entregables() {
   return (
     <Section id="entregables">
       <SectionHead tag="Los 8 entregables" title="Sistema completo" sub="Cada entregable es una pieza operativa del funnel. Haz clic en cualquier card para ver el detalle." />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="fade-up grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {items.map((item, i) => {
           const isOpen = open === i;
           return (
             <div key={i}
-              className={`fade-up bg-white rounded-2xl border cursor-pointer transition-all duration-300 overflow-hidden
+              className={`bg-white rounded-2xl border cursor-pointer transition-all duration-300 overflow-hidden
                 ${isOpen ? "border-[#002856] shadow-lg" : "border-[#C0E7EA]/60 hover:border-[#6BBFC4] shadow-sm card-hover"}`}
-              style={{ transitionDelay: `${i % 4 * 70}ms` }}
               onClick={() => setOpen(isOpen ? null : i)}>
               <div className="p-5">
                 <div className="flex items-center justify-between mb-3">
@@ -392,7 +391,7 @@ function Entregables() {
                   {isOpen ? "▲ Cerrar" : "▼ Ver detalle"}
                 </div>
               </div>
-              <div className={`accordion-content ${isOpen ? "open" : ""}`}>
+              <div style={{ maxHeight: isOpen ? "500px" : "0", overflow: "hidden", transition: "max-height 0.4s cubic-bezier(0.16,1,0.3,1)" }}>
                 <div className="px-5 pb-5 border-t border-[#EEF8F9]">
                   <ul className="mt-3 space-y-2">
                     {item.bullets.map((b, j) => (
