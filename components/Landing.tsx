@@ -20,8 +20,12 @@ function useScrollFade(className = "fade-up") {
 
 /* ─── Section wrapper ─── */
 function Section({ id, bg = "white", children }: { id?: string; bg?: string; children: React.ReactNode }) {
+  const bgClass =
+    bg === "light" ? "bg-[#EEF8F9]" :
+    bg === "deep"  ? "bg-[#F0F5FB]" :
+    "bg-white";
   return (
-    <section id={id} className={`py-20 px-6 ${bg === "light" ? "bg-[#EEF8F9]" : "bg-white"}`}>
+    <section id={id} className={`py-24 px-6 ${bgClass}`}>
       <div className="max-w-6xl mx-auto">{children}</div>
     </section>
   );
@@ -31,10 +35,10 @@ function Section({ id, bg = "white", children }: { id?: string; bg?: string; chi
 function SectionHead({ tag, title, sub }: { tag: string; title: string; sub?: string }) {
   const ref = useScrollFade();
   return (
-    <div ref={ref} className="fade-up text-center mb-14">
-      <span className="inline-block text-xs font-semibold tracking-widest text-[#6BBFC4] uppercase mb-3">{tag}</span>
-      <h2 style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-3xl md:text-4xl font-bold text-[#002856] mb-4">{title}</h2>
-      {sub && <p className="text-[#546E7A] text-lg max-w-2xl mx-auto">{sub}</p>}
+    <div ref={ref} className="fade-up text-center mb-16">
+      <span className="overline">{tag}</span>
+      <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-[#002856] mb-5">{title}</h2>
+      {sub && <p className="text-[#64748B] text-lg max-w-2xl mx-auto leading-relaxed">{sub}</p>}
     </div>
   );
 }
@@ -115,19 +119,18 @@ function Hero() {
       <div className="relative max-w-6xl mx-auto px-6 pt-28 pb-20">
         {/* Brand tag */}
         <div className="text-center mb-8">
-          <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase border border-[#C0E7EA]/30 text-[#C0E7EA]">
+          <span className="overline" style={{ color: "rgba(192,231,234,0.75)" }}>
             Indalo Water · Mercado Hispano USA
           </span>
         </div>
 
         {/* Main title */}
         <div className="text-center mb-6">
-          <h1 style={{ fontFamily: "'Montserrat', sans-serif" }}
-            className="text-5xl md:text-7xl font-black text-white leading-tight mb-4">
+          <h1 className="font-display text-6xl md:text-8xl lg:text-9xl text-white mb-4">
             Sistema de<br />
             <span className="gradient-text">Lanzamiento ROB</span>
           </h1>
-          <p className="text-[#C0E7EA]/80 text-xl md:text-2xl mt-4">
+          <p className="text-[#C0E7EA]/70 text-lg md:text-xl mt-6 tracking-wide">
             Validación 90 días · Mercado Hispano USA
           </p>
         </div>
@@ -154,8 +157,8 @@ function Hero() {
         {/* Scroll indicator */}
         <div className="text-center mt-16">
           <a href="#sistema" className="inline-flex flex-col items-center text-white/40 hover:text-[#C0E7EA] transition-colors group">
-            <span className="text-xs tracking-widest uppercase mb-2">Ver el sistema</span>
-            <div className="w-6 h-9 border-2 border-current rounded-full flex justify-center pt-1.5">
+            <span className="overline mb-2" style={{ color: "inherit" }}>Ver el sistema</span>
+            <div className="w-6 h-9 border border-current rounded-full flex justify-center pt-1.5 opacity-60">
               <div className="w-1 h-2 bg-current rounded-full animate-bounce" />
             </div>
           </a>
@@ -204,7 +207,7 @@ function Sistema() {
   const stack = ["Meta Verified", "n8n", "Clientify CRM", "ManyChat", "WhatsApp HSM", "WooCommerce"];
 
   return (
-    <Section id="sistema" bg="light">
+    <Section id="sistema" bg="white">
       <SectionHead tag="Arquitectura" title="Cómo funciona el sistema" sub="El funnel opera en 4 etapas conectadas. Cada lead pasa por captación, se califica automáticamente y llega al closer con contexto completo." />
 
       <div ref={ref} className="fade-up">
@@ -357,15 +360,15 @@ function Entregables() {
   ];
 
   return (
-    <Section id="entregables">
+    <Section id="entregables" bg="light">
       <SectionHead tag="Los 8 entregables" title="Sistema completo" sub="Cada entregable es una pieza operativa del funnel. Haz clic en cualquier card para ver el detalle." />
       <div className="fade-up grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {items.map((item, i) => {
           const isOpen = open === i;
           return (
             <div key={i}
-              className={`bg-white rounded-2xl border cursor-pointer transition-all duration-300 overflow-hidden
-                ${isOpen ? "border-[#002856] shadow-lg" : "border-[#C0E7EA]/60 hover:border-[#6BBFC4] shadow-sm card-hover"}`}
+              className={`bg-white rounded-2xl cursor-pointer transition-all duration-300 overflow-hidden
+                ${isOpen ? "border border-[#002856] shadow-lg" : "border border-[#C0E7EA]/50 hover:border-[#6BBFC4]/70 shadow-sm card-hover"}`}
               onClick={() => setOpen(isOpen ? null : i)}>
               <div className="p-5">
                 <div className="flex items-center justify-between mb-3">
@@ -453,7 +456,7 @@ function Modelo() {
   ];
 
   return (
-    <Section id="modelo" bg="light">
+    <Section id="modelo" bg="deep">
       <SectionHead tag="E7 — Modelo económico" title="Proyecciones 90 días"
         sub="$10,000/mes · Precio ROB $3,995 · Meta con historial activo · Google historial limitado en M1" />
       <div ref={ref} className="fade-up">
@@ -609,12 +612,12 @@ function Timeline() {
   ];
 
   return (
-    <Section id="timeline">
+    <Section id="timeline" bg="white">
       <SectionHead tag="E8 — Plan de ejecución" title="~112 días · $30,000"
         sub="Pre-launch extendido porque WooCommerce y quiz deben construirse desde cero. Los 90 días de paid media no cambian." />
       <div ref={ref} className="fade-up space-y-4">
         {phases.map((p, i) => (
-          <div key={i} className="rounded-2xl border-2 overflow-hidden" style={{ borderColor: p.border }}>
+          <div key={i} className="rounded-2xl overflow-hidden" style={{ border: `1px solid ${p.border}` }}>
             <div className="flex flex-col md:flex-row">
               {/* Left label */}
               <div className="md:w-44 shrink-0 p-5 flex flex-col justify-between" style={{ background: p.bg }}>
@@ -735,7 +738,7 @@ function ProximosPasos() {
   ];
 
   return (
-    <Section id="pasos">
+    <Section id="pasos" bg="deep">
       <SectionHead tag="Antes del lanzamiento" title="Próximos pasos"
         sub="Todo esto debe estar listo antes del día 29. No se activa tráfico hasta tener el funnel probado end-to-end." />
       <div ref={ref} className="fade-up grid grid-cols-1 lg:grid-cols-3 gap-5">
