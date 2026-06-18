@@ -1,26 +1,123 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-navy:       #002856;
+  --color-navy-light: #004987;
+  --color-aqua:       #C0E7EA;
+  --color-aqua-dark:  #6BBFC4;
+  --color-aqua-light: #EEF8F9;
+  --color-slate:      #546E7A;
+  --color-green:      #1A7A4A;
+  --color-green-bg:   #E8F7F0;
+  --color-red:        #BE123C;
+  --color-red-bg:     #FEF2F2;
+  --color-amber:      #7A4800;
+  --color-amber-bg:   #FFF8EC;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  background: #ffffff;
+  color: #1E2A35;
+}
+
+/* ---- Display font (condensed section titles, P2-inspired) ---- */
+.font-display {
+  font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+/* ---- Section overline — no pill, pure tracked uppercase ---- */
+.overline {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6BBFC4;
+  margin-bottom: 12px;
+}
+
+/* ---- Scroll animations ---- */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.fade-in.visible { opacity: 1; }
+
+/* Staggered children */
+.stagger > * { transition-delay: calc(var(--i, 0) * 80ms); }
+
+/* ---- Gradient text ---- */
+.gradient-text {
+  background: linear-gradient(135deg, #C0E7EA 0%, #6BBFC4 60%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---- Number ticker animation ---- */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.stat-value {
+  animation: count-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ---- Card hover ---- */
+.card-hover {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0, 40, 86, 0.10);
+}
+
+/* ---- Scenario card highlight ---- */
+.scenario-base {
+  box-shadow: 0 0 0 1.5px #002856, 0 8px 32px rgba(0, 40, 86, 0.18);
+}
+
+/* ---- Timeline connector ---- */
+.timeline-line::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: calc(50% + 20px);
+  right: calc(-50% + 20px);
+  height: 1px;
+  background: linear-gradient(90deg, #6BBFC4, #C0E7EA);
+}
+
+/* ---- Nav blur ---- */
+.nav-scrolled {
+  background: rgba(0, 40, 86, 0.95);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(192, 231, 234, 0.15);
+}
+
+/* ---- Progress bar ---- */
+@keyframes grow-bar {
+  from { width: 0; }
+}
+.bar-animate {
+  animation: grow-bar 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.3s;
 }
