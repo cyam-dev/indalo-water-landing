@@ -362,7 +362,7 @@ function Entregables() {
   return (
     <Section id="entregables" bg="light">
       <SectionHead tag="Los 8 entregables" title="Sistema completo" sub="Cada entregable es una pieza operativa del funnel. Haz clic en cualquier card para ver el detalle." />
-      <div className="fade-up grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="fade-up grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
         {items.map((item, i) => {
           const isOpen = open === i;
           return (
@@ -409,6 +409,25 @@ function Entregables() {
             </div>
           );
         })}
+      </div>
+
+      {/* CTA — PDF completo */}
+      <div className="text-center mt-2">
+        <a
+          href="/indalo-water-entregable-final.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-3 px-7 py-4 rounded-2xl font-semibold text-sm transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
+          style={{ background: "#002856", color: "#C0E7EA", fontFamily: "'Montserrat', sans-serif" }}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="12" y1="18" x2="12" y2="12"/>
+            <line x1="9" y1="15" x2="15" y2="15"/>
+          </svg>
+          Ver documento completo del sistema
+          <span className="text-white/40 text-xs font-normal">PDF · 21 páginas</span>
+        </a>
       </div>
     </Section>
   );
